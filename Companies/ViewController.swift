@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,10 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         
         navigationItem.title = "Companies"
+        
+        tableView.backgroundColor = .darkBlue
+        tableView.tableFooterView = UIView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
         
@@ -27,12 +31,27 @@ class ViewController: UIViewController {
         print("Adding company...")
     }
     
-    func setupNavigationStyle() {
-        let lightRed = UIColor(red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 8
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)        
         
-        navigationController?.navigationBar.barTintColor = lightRed
+        cell.backgroundColor = .tealColor
+        
+        cell.textLabel?.text = "THE COMPANY NAME"
+        cell.textLabel?.textColor = .white
+        
+        return cell
+    }
+    
+    func setupNavigationStyle() {
+        
+        navigationController?.navigationBar.barTintColor = .lightRed
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
 }
