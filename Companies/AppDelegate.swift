@@ -8,6 +8,12 @@
 
 import UIKit
 
+class LightStatusBarNavController: UINavigationController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,9 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let dummyViewController = UIViewController()
-        dummyViewController.view.backgroundColor = .blue
-        let navController = UINavigationController(rootViewController: dummyViewController)
+        let companiesController = ViewController()
+        let navController = LightStatusBarNavController(rootViewController: companiesController)
         window?.rootViewController = navController
         
         return true
