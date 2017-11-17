@@ -18,7 +18,9 @@ class ViewController: UITableViewController {
         navigationItem.title = "Companies"
         
         tableView.backgroundColor = .darkBlue
+        tableView.separatorColor = .white
         tableView.tableFooterView = UIView()
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
@@ -29,6 +31,16 @@ class ViewController: UITableViewController {
     
     @objc func handleAddCompany() {
         print("Adding company...")
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .lightBlue
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,6 +54,7 @@ class ViewController: UITableViewController {
         
         cell.textLabel?.text = "THE COMPANY NAME"
         cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
         return cell
     }
